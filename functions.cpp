@@ -55,7 +55,7 @@ void Stack::pop() {
 int Stack::size() {
     return count; 
 }
-
+//top of stack
 int Stack::peek() 
 {
     if (!isEmpty())
@@ -64,14 +64,14 @@ int Stack::peek()
     }
     return -1;  
 }
-
+//clear stack
 void Stack::clear()
  {
     while (!isEmpty()) {
         pop();  
     }
 }
-
+//print stack
 void Stack::printStack() {
     Node* temp = top;
     while (temp != nullptr) {
@@ -89,9 +89,15 @@ Queue::Queue() {
 Queue::~Queue() {
     delete[] top;
 }
-
-bool Queue::isEmpty() {
-    return top == nullptr;
+// check
+bool Queue::isEmpty() 
+{
+  if (top==nullptr)
+  {
+    return true;
+  }
+  else
+    return false;
 }
 
 void Queue::enqueue(int data) {
