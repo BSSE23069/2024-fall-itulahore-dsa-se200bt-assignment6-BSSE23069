@@ -36,44 +36,46 @@ Stack::Stack() {
 bool Stack::isEmpty() {
     return top == nullptr;
 }
-
-void Stack::push(int data) {
+// push is stack
+void Stack::push(int data)
+ {
     Node* n = new Node(data);
-    n->setNext(top);  // Push the new node to the top
+    n->setNext(top);  
     top = n;
     count++;
 }
 
 void Stack::pop() {
     if (!isEmpty()) {
-        Node* temp = top;
         top = top->getNext();
-        delete temp;  // Free the memory of the removed node
         count--;
     }
 }
-
+// size of stack
 int Stack::size() {
-    return count;  // Return the size of the stack
+    return count; 
 }
 
-int Stack::peek() {
-    if (!isEmpty()) {
-        return top->getData();  // Return the top element
+int Stack::peek() 
+{
+    if (!isEmpty())
+     {
+        return top->getData();  
     }
-    return -1;  // Return -1 if the stack is empty
+    return -1;  
 }
 
-void Stack::clear() {
+void Stack::clear()
+ {
     while (!isEmpty()) {
-        pop();  // Pop all elements
+        pop();  
     }
 }
 
 void Stack::printStack() {
     Node* temp = top;
     while (temp != nullptr) {
-        std::cout << temp->getData() << std::endl;
+        cout << temp->getData() << endl;
         temp = temp->getNext();
     }
 }
@@ -85,7 +87,7 @@ Queue::Queue() {
 }
 
 Queue::~Queue() {
-    clear();  // Clear the queue when destroyed
+    delete[] top;
 }
 
 bool Queue::isEmpty() {
@@ -95,41 +97,40 @@ bool Queue::isEmpty() {
 void Queue::enqueue(int data) {
     Node* n = new Node(data);
     if (isEmpty()) {
-        top = n;  // Set the first element
-    } else {
+        top = n;  
+    } else 
+    {
         Node* temp = top;
         while (temp->getNext() != nullptr) {
-            temp = temp->getNext();  // Traverse to the end
+            temp = temp->getNext();  
         }
-        temp->setNext(n);  // Append the new node
+        temp->setNext(n);  
     }
     count++;
 }
 
 void Queue::dequeue() {
     if (!isEmpty()) {
-        Node* temp = top;
-        top = top->getNext();
-        delete temp;  // Free the memory of the removed node
+        top = top->getNext(); 
         count--;
     }
 }
 
 int Queue::size() {
-    return count;  // Return the size of the queue
+    return count; 
 }
 
 void Queue::printQueue() {
     Node* temp = top;
     while (temp != nullptr) {
-        std::cout << "Value: " << temp->getData() << std::endl;
+        cout << "Value: " << temp->getData() << endl;
         temp = temp->getNext();
     }
 }
 
 void Queue::clear() {
     while (!isEmpty()) {
-        dequeue();  // Dequeue all elements
+        dequeue();  
     }
 }
 
