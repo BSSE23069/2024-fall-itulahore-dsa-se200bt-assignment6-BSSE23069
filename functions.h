@@ -44,6 +44,8 @@ public:
     int size();
     void printQueue();
     void clear();
+  int   getFront();
+int getEnd();
 
 
 };

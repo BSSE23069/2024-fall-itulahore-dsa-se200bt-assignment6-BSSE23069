@@ -132,3 +132,18 @@ void Queue::clear() {
         dequeue();  // Dequeue all elements
     }
 }
+
+int Queue::getFront()
+{
+    return top->getData();
+}
+
+int Queue::getEnd()
+{
+  Node * tem=top;
+  while (tem->getNext())
+  {
+    tem=tem->getNext();
+  }
+  return tem->getData();
+}
