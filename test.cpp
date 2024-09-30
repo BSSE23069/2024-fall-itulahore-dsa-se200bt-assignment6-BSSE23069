@@ -117,6 +117,7 @@ TEST_CASE("Pop from empty stack test", "[pop]") {
 
     // Ensure the stack is still empty
     REQUIRE(myStack.isEmpty() == true);
+    cout << "Pop Function Done" << endl;
 }
 
 TEST_CASE("Peek from empty stack test", "[peek]") {
@@ -130,3 +131,90 @@ TEST_CASE("Peek from empty stack test", "[peek]") {
 }
 
 
+// Test Case 1: Empty Queue Check
+TEST_CASE("Test Case 1: Empty Queue Check", "[queue]") {
+    Queue q;
+    REQUIRE(q.isEmpty() == true);
+}
+
+// Test Case 2: Enqueue into Empty Queue and Check First and Last Element
+TEST_CASE("Test Case 2: Enqueue into Empty Queue and Check First and Last Element", "[queue]") {
+    Queue q;
+    q.enqueue(10);
+    REQUIRE(q.size() == 1);
+    REQUIRE(q.getFront() == 10); // Check front element
+    REQUIRE(q.getEnd() == 10);   // Check end element
+}
+
+// Test Case 3: Enqueue Multiple Elements and Check First and Last Element
+TEST_CASE("Test Case 3: Enqueue Multiple Elements and Check First and Last Element", "[queue]") {
+    Queue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    REQUIRE(q.size() == 4);
+    REQUIRE(q.getFront() == 10); // Check front element
+    REQUIRE(q.getEnd() == 40);   // Check end element
+}
+
+// Test Case 4: Dequeue Single Element and Check First and Last Element
+TEST_CASE("Test Case 4: Dequeue Single Element and Check First and Last Element", "[queue]") {
+    Queue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.dequeue();
+    REQUIRE(q.size() == 3);
+    REQUIRE(q.getFront() == 20); // Check updated front element
+    REQUIRE(q.getEnd() == 40);   // Check end element remains the same
+}
+
+// Test Case 5: Dequeue Multiple Elements and Check First and Last Element
+TEST_CASE("Test Case 5: Dequeue Multiple Elements and Check First and Last Element", "[queue]") {
+    Queue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.dequeue();
+    q.dequeue();
+    REQUIRE(q.size() == 2);
+    REQUIRE(q.getFront() == 30); // Front should now be 30
+    REQUIRE(q.getEnd() == 40);   // End should still be 40
+}
+
+// Test Case 6: Dequeue from Empty Queue
+TEST_CASE("Test Case 6: Dequeue from Empty Queue", "[queue]") {
+    Queue q;
+    q.enqueue(10);
+    q.dequeue();
+    REQUIRE(q.isEmpty() == true);
+    q.dequeue(); // This should handle gracefully
+}
+
+// Test Case 7: Enqueue and Dequeue and Check First and Last Element
+TEST_CASE("Test Case 7: Enqueue and Dequeue and Check First and Last Element", "[queue]") {
+    Queue q;
+    q.enqueue(50);
+    q.enqueue(60);
+    REQUIRE(q.size() == 2);
+    REQUIRE(q.getFront() == 50); // Front should be 50
+    REQUIRE(q.getEnd() == 60);   // End should be 60
+    q.dequeue();
+    REQUIRE(q.size() == 1);
+    REQUIRE(q.getFront() == 60); // Front should now be 60
+    REQUIRE(q.getEnd() == 60);   // End should also be 60
+}
+
+// Test Case 9: Edge Case - Single Element Queue
+TEST_CASE("Test Case 9: Edge Case - Single Element Queue", "[queue]") {
+    Queue q2;
+    q2.enqueue(70);
+    REQUIRE(q2.size() == 1);
+    REQUIRE(q2.getFront() == 70);
+    REQUIRE(q2.getEnd() == 70);
+    q2.dequeue();
+    REQUIRE(q2.isEmpty() == true);
+}

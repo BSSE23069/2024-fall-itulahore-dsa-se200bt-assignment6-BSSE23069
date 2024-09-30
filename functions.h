@@ -8,10 +8,14 @@ private:
     Node* next;
 public:
     Node();
+    Node(int d);
+    void setNext(Node * val );
+    Node* getNext();
+    void setData(int val);
+    int getData();
 };
 class  Stack{
      Node* top;
-     Node* head;
   int count;
 public:
     Stack();
@@ -31,7 +35,6 @@ public:
 class Queue{
   Node* top;
   int count;
-  Node* head;
 public:
     Queue();
     ~Queue();
@@ -40,7 +43,7 @@ public:
     void dequeue();
     int size();
     void printQueue();
-    int *getQueue();
+    void clear();
 
 
 };
