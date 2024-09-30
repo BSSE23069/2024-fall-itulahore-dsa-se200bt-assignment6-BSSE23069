@@ -34,7 +34,12 @@ Stack::Stack() {
 }
 
 bool Stack::isEmpty() {
-    return top == nullptr;
+    if (top==nullptr)
+  {
+    return true;
+  }
+  else
+    return false;
 }
 // push is stack
 void Stack::push(int data)
