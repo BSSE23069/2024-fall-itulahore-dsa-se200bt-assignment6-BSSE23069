@@ -1,223 +1,161 @@
+using namespace std;
 #include <iostream>
 #include "functions.h"
-#include <queue>
-using namespace std;
-TreeNode ::TreeNode(int v){
-data=v;
-left=nullptr;
-right=nullptr;
+Node::Node() {
+    data = 0;
+    next = nullptr;
 }
- TreeNode* TreeNode :: getLeftChild(){
-return left;
- }
- TreeNode* TreeNode :: getRightChild(){
-return right;
- }
- int TreeNode :: getData(){
-return data;
- }
- //add left child
- void TreeNode ::addLeftChild(TreeNode* node){
-     if (left==nullptr)
+
+Node::Node(int d) {
+    data = d;
+    next = nullptr;
+}
+
+void Node::setNext(Node* val) {
+    next = val;
+}
+
+Node* Node::getNext() {
+    return next;
+}
+
+void Node::setData(int d) {
+    data = d;
+}
+
+int Node::getData() {
+    return data;
+}
+
+// Stack class
+Stack::Stack() {
+    top = nullptr;
+    count = 0;
+}
+
+bool Stack::isEmpty() {
+    if (top==nullptr)
+  {
+    return true;
+  }
+  else
+    return false;
+}
+// push is stack
+void Stack::push(int data)
+ {
+    Node* n = new Node(data);
+    n->setNext(top);  
+    top = n;
+    count++;
+}
+
+void Stack::pop() {
+    if (!isEmpty()) {
+        top = top->getNext();
+        count--;
+    }
+}
+// size of stack
+int Stack::size() {
+    return count; 
+}
+//top of stack
+int Stack::peek() 
+{
+    if (!isEmpty())
      {
-        left=node;
-        return;
-     }
-     delete left;
-     left=node;
- }
- // add right child
- void TreeNode :: addRightChild(TreeNode* node){
-       if (right==nullptr)
-       {
-           right=node;
-           return;
-       }
-       delete right;
-       right=node;
-       
- }
-  Tree::Tree(){
-     root=nullptr;
+        return top->getData();  
     }
-// insert
- void Tree:: insertNode(int value){
-     TreeNode* p=new TreeNode(value);
-if (root==nullptr)
-{
-    root=p;
-    return;
+    return -1;  
 }
-queue<TreeNode*>t;
-t.push(root);
-while (!t.empty())
-{
-    TreeNode *aval=t.front();
-    t.pop();
-    if (aval->left==nullptr)
-    {
-        aval->left=p;
-        return;
+//clear stack
+void Stack::clear()
+ {
+    while (!isEmpty()) {
+        pop();  
     }
-    else
-    {
-        t.push(aval->left);
+}
+//print stack
+void Stack::printStack() {
+    Node* temp = top;
+    while (temp != nullptr) {
+        cout << temp->getData() << endl;
+        temp = temp->getNext();
     }
-    if (aval->right==nullptr)
-    {
-        aval->right=p;
-        return;
-    }
-    else
-    {
-        t.push(aval->right);
-    }
-    
-    
 }
 
-
- }
- 
- void Tree:: printTree(){
-if (root==nullptr)
-{
-    return;
-}
-queue<TreeNode*>t;
-t.push(root);
-while (!t.empty())
-{
-    TreeNode *aval=t.front();
-    t.pop();
-    cout<<aval->data;
-    if (aval->left)
-    {
-        t.push(aval->left);
-    }
-    
-    if (aval->right)
-    {
-        t.push(aval->right);
-    }
- }
- }
- 
- int Tree:: getDegree(int data){
-        TreeNode* aval = root;
-        queue<TreeNode*> q;
-        q.push(aval);
-
-        while (!q.empty()) {
-            aval = q.front();
-            q.pop();
-
-            if (aval->data == data) {
-                int degree = 0;
-                if (aval->left) 
-                {
-                    degree++;
-                }
-                if (aval->right) {
-                    degree++;
-                }
-                return degree;
-            }
-
-            if (aval->left)
-            {
-                q.push(aval->left);
-            }
-            if (aval->right) 
-            {
-                q.push(aval->right);
-            }
-        }
-        return -1; 
-    }
-   
- int Tree:: getHeight(int data){
-    TreeNode* ch=new TreeNode(data);
-if (root == nullptr) {
-        return -1; 
-    }
-    if (root == ch) {
-        return 0; 
-    }
-    int height = 0;
-    queue<TreeNode*> t;
-    t.push(root);
-    while (!t.empty()) {
-        TreeNode* check = t.front();
-        int nodeCount = t.size(); 
-            height++;
-     if(check==ch){
-                return height;
-            }
-            else
-            {
-        while (nodeCount > 0) {
-            TreeNode* aval = t.front();
-           
-                t.pop();
-
-            if (aval->left) {
-                t.push(aval->left);
-            }
-            if (aval->right) {
-                t.push(aval->right);
-            }
-            nodeCount--;
-        }
-        }
-    }
-    return height-=1;
-
- }
- int Tree::getTreeHeight() {
-    if (root == nullptr) {
-        return -1; 
-    }
-    int height = 0;
-    queue<TreeNode*> t;
-    t.push(root);
-    while (!t.empty()) {
-        int nodeCount = t.size();
-        height++;
-        while (nodeCount > 0) {
-            TreeNode* aval = t.front();
-            t.pop();
-
-            if (aval->left) {
-                t.push(aval->left);
-            }
-            if (aval->right) {
-                t.push(aval->right);
-            }
-            nodeCount--;
-        }
-    }
-    return height-=1; 
+// Queue class
+Queue::Queue() {
+    top = nullptr;
+    count = 0;
 }
 
-    TreeNode* Tree:: findNode(int data) {
-       TreeNode* aval = root;
-        queue<TreeNode*> q;
-        q.push(aval);
+Queue::~Queue() {
+    delete[] top;
+}
+// check
+bool Queue::isEmpty() 
+{
+  if (top==nullptr)
+  {
+    return true;
+  }
+  else
+    return false;
+}
 
-        while (!q.empty()) {
-            aval = q.front();
-            q.pop();
-
-            if (aval->data == data) {
-                return aval;
-            }
-
-            if (aval->left) q.push(aval->left);
-            if (aval->right) q.push(aval->right);
+void Queue::enqueue(int data) {
+    Node* n = new Node(data);
+    if (isEmpty()) {
+        top = n;  
+    } else 
+    {
+        Node* temp = top;
+        while (temp->getNext() != nullptr) {
+            temp = temp->getNext();  
         }
-        return nullptr;
+        temp->setNext(n);  
     }
- TreeNode* Tree::getRoot(){
-return root;
- }
+    count++;
+}
+
+void Queue::dequeue() {
+    if (!isEmpty()) {
+        top = top->getNext(); 
+        count--;
+    }
+}
+
+int Queue::size() {
+    return count; 
+}
+
+void Queue::printQueue() {
+    Node* temp = top;
+    while (temp != nullptr) {
+        cout << "Value: " << temp->getData() << endl;
+        temp = temp->getNext();
+    }
+}
+
+void Queue::clear() {
+    while (!isEmpty()) {
+        dequeue();  
+    }
+}
+
+int Queue::getFront()
+{
+    return top->getData();
+}
+
+int Queue::getEnd()
+{
+  Node * tem=top;
+  while (tem->getNext())
+  {
+    tem=tem->getNext();
+  }
+  return tem->getData();
+}
